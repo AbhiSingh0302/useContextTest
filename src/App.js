@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Cart from './components/Cart';
 import Header from './components/Header';
+import { ItemContextProvider } from './store/AddItemContext';
 
 function App() {
   const [cartIsShown,setCartIsShown] = useState(false);
@@ -15,10 +16,10 @@ function App() {
   }
 
   return (
-    <>
+    <ItemContextProvider>
     {cartIsShown && <Cart onClose={hideCardHandler}/>}
     <Header onShowCart={showCardHandler}/>
-    </>
+    </ItemContextProvider>
   );
 }
 
