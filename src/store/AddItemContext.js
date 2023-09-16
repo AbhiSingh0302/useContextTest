@@ -13,12 +13,22 @@ const ItemContextProvider = (props) => {
         setItem(prev => [...prev,item])
     }
 
-    const removeItem = (id) => {
-        setItem(prev => prev.filter(item => item.id !== id))
+    const reduceItem = (id) => {
+        console.log(id);
+        setItem(prev => prev.map(item => {
+            console.log(item,id);
+            if(item.id.toString() === id.toString()){
+                if(Number(item.amount)>1){
+                    return {...item, amount: Number(item.amount)-1}
+                }
+                return {...item, amount: "Unavailable"};
+            }
+            return item;
+        }))
     }
 
     const cartContext = {
-        items, addItem, removeItem
+        items, addItem, reduceItem
     }
 
     return <itemContext.Provider value={cartContext}>
